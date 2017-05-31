@@ -1,7 +1,5 @@
 /* @flow */
 
-import { compose } from 'redux';
-
 import Recording from '../../../modules/UI/recording/Recording';
 import SideContainerToggler
     from '../../../modules/UI/side_pannels/SideContainerToggler';
@@ -91,8 +89,13 @@ export function dockToolbox(dock: boolean): Function {
 function _getButtonHandlers(dispatch, getState) {
     const { isGuest } = getState()['features/jwt'];
 
-    const localRaiseHandHandler = compose(dispatch, changeLocalRaiseHand);
-    const toggleFullScreenHandler = compose(dispatch, toggleFullScreen);
+    const localRaiseHandHandler = (...args) => {
+        dispatch(changeLocalRaiseHand(...args));
+    };
+
+    const toggleFullScreenHandler = (...args) => {
+        dispatch(toggleFullScreen(...args));
+    };
 
     return {
         /**
